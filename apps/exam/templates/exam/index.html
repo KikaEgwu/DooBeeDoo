@@ -1,9 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Start</title>
+	<title>Login/Registration</title>
 </head>
 <body>
-<h1>It's Up and RUNNING!</h1>
+	<h2>Welcome</h2>
+	{% if messages %}
+		<ul class="messages">
+    		{% for message in messages %}
+    			<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    		{% endfor %}
+		</ul>
+	{% endif %}
+
+	<div>
+		<h3>Register</h3><br>
+		<form method="POST" action="{% url 'register' %}">
+			{% csrf_token %}
+			Name: <input type="" name="name"><br>
+			Alias: <input type="" name="alias">
+			Email: <input type="" name="email"><br>
+			Password: <input type="password" name="password"><br>
+				*Password should be atleast 8 characters<br>
+			Confirm PW: <input type="password" name="confirm_password"><br>
+			Date of Birth: <input type="date" name="dateofbirth">
+			<input type="submit" name="submit"><br>
+		</form>
+	</div>
+	<div>
+		<h3>Login</h3><br>
+		<form method="POST" action="{% url 'logon' %}">
+			{% csrf_token %}
+			Email: <input type="" name="email"><br>
+			Password: <input type="password" name="password"><br>
+			<input type="submit" name="submit"><br>
+		</form>
+	</div>
 </body>
 </html>

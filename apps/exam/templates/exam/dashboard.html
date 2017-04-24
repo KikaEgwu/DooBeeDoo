@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Pokes</title>
+</head>
+<body>
+<h2>Welcome, {{request.session.username}}</h2>
+<h2><a href="{% url 'logout' %}">Logout</a></h2>
+
+{% for poke in pokes %}
+	{% if poke.pokedwho == request.session.logged_in_user %}
+		<h4>{{poke.user.name}} poked you {{poke.pokes}} times</h4>
+	{% endif %}
+{% endfor %}
+
+<p>People you may want to poke:</p>
+<table>
+		<tr>
+			<th>Name</th>
+			<th>Alias</th>
+			<th>Email Address</th>
+			<th>Poke History</th>
+			<th>Action</th>
+		</tr>
+		{% for user in users %}
+			{% if request.session.logged_in_user != user.id %}
+			<tr>
+				<td>{{user.name}}</td>
+				<td>{{user.alias}}</td>
+				<td>{{user.email}}</td>
+				<td>{{user.pokes}}</td>
+				<td>
+					<form method="POST" action="{% url 'poke' %}">
+					{% csrf_token %}
+					<input type="hidden" name="poke" value="{{user.id}}">
+					<input type="submit" name="submit">
+					</form>
+				</td>
+			</tr>
+			{% endif %}
+		{% endfor %}
+	</table>
+	
+</body>
+</html>
