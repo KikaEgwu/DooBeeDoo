@@ -5,14 +5,16 @@
 	<link href="https://maxcdn.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet" integrity="sha384-4FeI0trTH/PCsLWrGCD1mScoFu9Jf2NdknFdFoJhXZFwsvzZ3Bo5sAh7+zL8Xgnd" crossorigin="anonymous">
 </head>
 <body>
-<h2 class="text-left inline">Welcome, {{request.session.username}}</h2>
-<h2 class="text-right inline"><a href="{% url 'logout' %}">Logout</a></h2>
+<h1 class="inline">Welcome, {{request.session.username}}</h1>
+<h2 class="text-right"><a href="{% url 'logout' %}">Logout</a></h2>
+<h3>{{count}} people poked you!</h3>
 
 {% for poke in pokes %}
 	{% if poke.pokedwho == request.session.logged_in_user %}
-		<pre><p>{{poke.user.name}} poked you {{poke.pokes}} times</p></pre>
+		<p class="text-left"><strong>{{poke.user.name}} poked you {{poke.pokes}} times</strong></p>
 	{% endif %}
 {% endfor %}
+
 
 
 <p>People you may want to poke:</p>

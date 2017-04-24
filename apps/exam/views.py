@@ -29,10 +29,17 @@ def dashboard(request):
 	users = User.objects.all()
 	pokes = Poke.objects.all()
 
+	count = 0
+
+	for poke in pokes:
+		if poke.pokedwho == request.session['logged_in_user']:
+			count += 1
+
 	context = {
 
 		"users": users,
 		"pokes": pokes,
+		"count": count,
 		}	
 	return render(request, 'exam/dashboard.html', context)
 

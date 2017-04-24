@@ -45,8 +45,8 @@ class UserManager(models.Manager):
 			pokes = 0,
 			)
 		new_user.save()
-		request.session['logged_in_user'] = user.id
-		request.session['username'] = user.name
+		request.session['logged_in_user'] = new_user.id
+		request.session['username'] = new_user.name
 		return True
 
 	def logon(self, request):
