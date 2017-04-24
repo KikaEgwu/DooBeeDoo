@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>Login/Registration</title>
+	<link href="https://maxcdn.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet" integrity="sha384-4FeI0trTH/PCsLWrGCD1mScoFu9Jf2NdknFdFoJhXZFwsvzZ3Bo5sAh7+zL8Xgnd" crossorigin="anonymous">
 </head>
 <body>
 	<h2>Welcome</h2>
@@ -13,8 +14,9 @@
 		</ul>
 	{% endif %}
 
-	<div>
+	<div class="inline">
 		<h3>Register</h3><br>
+		<pre>
 		<form method="POST" action="{% url 'register' %}">
 			{% csrf_token %}
 			Name: <input type="" name="name"><br>
@@ -26,15 +28,18 @@
 			Date of Birth: <input type="date" name="dateofbirth">
 			<input type="submit" name="submit"><br>
 		</form>
+		</pre>
 	</div>
-	<div>
+	<div class="inline">
 		<h3>Login</h3><br>
+		<pre>
 		<form method="POST" action="{% url 'logon' %}">
 			{% csrf_token %}
 			Email: <input type="" name="email"><br>
 			Password: <input type="password" name="password"><br>
 			<input type="submit" name="submit"><br>
 		</form>
+		</pre>
 	</div>
 </body>
 </html>
